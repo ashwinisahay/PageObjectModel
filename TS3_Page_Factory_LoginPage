@@ -1,0 +1,116 @@
+package com.CRM.qa.ApplictionPage;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+
+import com.CRM.qa.BASEFILE.BaseClass;
+
+public class LoginInPage extends BaseClass {
+
+//Page Factory.
+
+	@FindBy(id = "search_query_top")
+	WebElement Searchfield;
+
+	@FindBy(name = "submit_search")
+	WebElement ClickSearchbutton;
+
+	@FindBy(xpath = "//*[@id=\"header\"]/div[2]/div/div/nav/div[1]/a")
+	WebElement SignIn;
+
+	@FindBy(id = "email")
+	WebElement email;
+
+	@FindBy(id = "passwd")
+	WebElement Pwd;
+
+	@FindBy(id = "SubmitLogin")
+	WebElement Submit_Button;
+
+	@FindBy(xpath = "//*[@id=\"header_logo\"]/a/img")
+	WebElement logo;
+	
+	@FindBy (xpath = "//*[@id=\"center_column\"]/ul/li[1]/div/div[2]/div[2]/a[1]")
+	WebElement AddToButton;
+	
+	@FindBy (xpath = "//*[@id=\"layer_cart\"]/div[1]/div[2]/div[4]/span/span/i")
+	WebElement ContinueShopping;
+
+	@FindBy(xpath = "//*[@id=\"login_form\"]/h3")
+	WebElement Old_registered;
+	
+	// Init class.
+
+	public LoginInPage() {
+
+		PageFactory.initElements(driver, this);
+
+	}
+
+	public String pageTitle() {
+		return driver.getTitle();
+	}
+
+	public String logoCRM() {
+		
+		return logo.toString();
+		//return driver.toString();
+	}
+
+	// Search item.
+
+	public void Searchitem() {
+
+		boolean ss = Searchfield.isEnabled();
+		String cc = com.CRM.qa.TestData.TestDataprovider.Searchword;
+
+		if (ss == true) {
+			Searchfield.sendKeys(cc);
+			ClickSearchbutton.click();
+		}
+	}
+
+	public void ClickSibmit() {
+		ClickSearchbutton.click();
+	}
+	
+	
+	public void Addtobuttomclick() {
+		AddToButton.click();
+	}
+	
+	public void ContinueShopping() {
+		ContinueShopping.click();
+	}
+	
+	
+	//Sign in Button click here
+
+	public void clickSignIn() {
+		SignIn.click();
+
+	}
+	
+	public void Already_registered(){
+		
+		String SS = Old_registered.getText();
+		System.out.println(SS);
+	}
+	
+
+	public SignInPage login(String mail, String pass) {
+
+		//mail = com.CRM.qa.TestData.TestDataprovider.mail;
+		// pass = com.CRM.qa.TestData.TestDataprovider.pass;
+
+		email.sendKeys(mail);
+		Pwd.sendKeys(pass);
+		Submit_Button.click();
+
+		return new SignInPage();
+	}
+
+}
