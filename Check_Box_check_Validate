@@ -1,0 +1,50 @@
+package add_1;
+
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class Check_Box_check {
+
+	public static void main(String[] args) {
+
+		System.setProperty("webdriver.chrome.driver", "C:\\Study\\chromedriver_win32\\chromedriver.exe");
+		WebDriver driver = new ChromeDriver();
+		// FirefoxDriver driver = new FirefoxDriver();
+		driver.get("https://www.seleniumeasy.com/test/basic-checkbox-demo.html");
+
+		// get Title
+		String str = driver.getTitle();
+		System.out.println(str);
+
+		driver.manage().window().maximize();
+
+		WebElement Headertext = driver.findElement(By.xpath("//*[@id=\"easycont\"]/div/div[2]/div[2]/div[1]"));
+		String Inbound_email = Headertext.getAttribute("value");
+		System.out.println(Inbound_email);
+
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+		WebElement maleRadioBtn = driver
+				.findElement(By.xpath("//*[@id=\"easycont\"]/div/div[2]/div[2]/div[2]/div[2]/label/input"));
+
+		boolean radioBtnIsEnabled2 = maleRadioBtn.isDisplayed();
+		System.out.println("Is Male radio button isDisplayed: " + radioBtnIsEnabled2);
+
+		boolean radioBtnIsEnabled = maleRadioBtn.isEnabled();
+		System.out.println("Is Male radio button isEnabled: " + radioBtnIsEnabled);
+
+		maleRadioBtn.click();
+
+		boolean radioBtnIsEnabled1 = maleRadioBtn.isSelected();
+		System.out.println("Is Male radio button isSelected: " + radioBtnIsEnabled1);
+
+		driver.close();
+
+	}
+
+}
