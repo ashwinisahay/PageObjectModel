@@ -1,0 +1,30 @@
+/**
+ * @author Ashwini Kumar
+ *
+ */
+
+
+package com.MyPageHome;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+
+public class HomePage extends BasePage {
+
+	private By Home_header = By.className("private-header__heading private-header__heading--solo");
+
+	public HomePage(WebDriver driver) {
+		super(driver);
+
+	}
+
+	public String getpagetotel() {
+
+		return getpageTitel();
+	}
+
+	public String getHome_header() {
+		return getpageHeader(Home_header);
+	}
+
+}
