@@ -1,0 +1,111 @@
+package com.CRM.qa.ApplictionPage;
+
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
+
+import com.CRM.qa.BASEFILE.BaseClass;
+
+public class PersonalInfoPage extends BaseClass {
+
+	// Page Factory.
+
+	@FindBy(id = "id_gender1")
+	WebElement RadioMale;
+
+	@FindBy(id = "firstname")
+	WebElement FirstN;
+
+	@FindBy(id = "lastname")
+	WebElement LastN;
+
+	@FindBy(id = "email")
+	WebElement email2;
+
+	@FindBy(id = "old_passwd")
+	WebElement Passwd_old;
+
+	@FindBy(id = "passwd")
+	WebElement Passwd_New;
+
+	@FindBy(id = "confirmation")
+	WebElement confirmation_Pass;
+
+	@FindBy(xpath = "//*[@id=\"center_column\"]/div/form/fieldset/div[11]/button/span/text()")
+	WebElement Save;
+
+	// Init class.
+
+	public PersonalInfoPage() {
+
+		PageFactory.initElements(driver, this);
+
+	}
+
+	public String pageTitle() {
+		return driver.getTitle();
+	}
+
+	public boolean radiocheck() {
+		boolean DD = RadioMale.isSelected();
+		if (DD == true) {
+			Assert.assertTrue(true, "Selection Matched");
+
+		}else
+			Assert.assertTrue(false, "Selection doesn't Matched");
+
+		return DD;
+
+	}
+
+	public String First_Name(String FN) {
+		// String FirstN = com.CRM.qa.TestData.TestDataprovider.FN;
+		FirstN.sendKeys(FN);
+		return FN;
+
+	}
+
+	public String Last_Name(String LN) {
+		// String FirstN = com.CRM.qa.TestData.TestDataprovider.FN;
+		FirstN.sendKeys(LN);
+		return LN;
+
+	}
+
+	public String Email_Name(String Email) {
+		// String FirstN = com.CRM.qa.TestData.TestDataprovider.FN;
+		email2.sendKeys(Email);
+		return Email;
+
+	}
+
+	public String Current_Password(String Password) {
+		// String FirstN = com.CRM.qa.TestData.TestDataprovider.FN;
+		Passwd_old.sendKeys(Password);
+		return Password;
+
+	}
+
+	public String New_Password(String New_Password) {
+		// String FirstN = com.CRM.qa.TestData.TestDataprovider.FN;
+		Passwd_New.sendKeys(New_Password);
+		return New_Password;
+
+	}
+
+	public String Confirm_Password(String Confirm_Password) {
+		// String FirstN = com.CRM.qa.TestData.TestDataprovider.FN;
+		confirmation_Pass.sendKeys(Confirm_Password);
+		return Confirm_Password;
+
+	}
+
+	public void SAVE() {
+		Save.click();
+	}
+
+}
