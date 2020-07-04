@@ -1,0 +1,64 @@
+/**
+ * @author Ashwini Kumar
+ */
+package com.MyPageHome;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+/**
+ * @author Ashwini Kumar
+ *
+ */
+public class LoginPage extends BasePage {
+
+	private By emailId = By.id("username");
+	private By password = By.id("password");
+	private By LoginButton = By.id("loginBtn");
+	private By header = By.xpath("//*[@id=\"hs-login\"]/div[1]/i18n-string");
+
+	public LoginPage(WebDriver driver) {
+		super(driver);
+
+	}
+
+	// getters;
+
+	public WebElement getEmailId() {
+		return getElement(emailId);
+	}
+
+	public WebElement getPassword() {
+		return getElement(password);
+	}
+
+	public WebElement getLoginButton() {
+		return getElement(LoginButton);
+	}
+
+	public WebElement getHeader() {
+		return getElement(header);
+	}
+
+	public String getPageTitel() {
+		return getpageTitel();
+
+	}
+
+	public void Loginpageheader() {
+
+		getpageHeader(header);
+	}
+
+	public HomePage dologin(String username, String pwd) {
+
+		getEmailId().sendKeys(username);
+		getPassword().sendKeys(pwd);
+		getLoginButton().click();
+
+		return getInstance(HomePage.class);
+
+	}
+
+}
