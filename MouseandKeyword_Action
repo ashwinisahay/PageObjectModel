@@ -1,0 +1,63 @@
+package add_1;
+
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.Select;
+
+public class MouseandKeyword {
+
+	public static void main(String[] args) {
+
+		System.setProperty("webdriver.chrome.driver", "C:\\Study\\chromedriver_win32\\chromedriver.exe");
+		WebDriver driver = new ChromeDriver();
+		driver.get("http://demoqa.com/text-box");
+
+		// get Title
+		String str = driver.getTitle();
+		System.out.println(str);
+
+		driver.manage().window().maximize();
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+		WebElement FN = driver.findElement(By.id("userName"));
+		// WebElement Email = driver.findElement(By.id("userEmail"));
+		WebElement current_address = driver.findElement(By.id("currentAddress"));
+		WebElement permanentAddress = driver.findElement(By.id("permanentAddress"));
+		WebElement submitButton = driver.findElement(By.id("submit"));
+
+		Actions action = new Actions(driver);
+
+		action.sendKeys(FN, "Mr.Jones").perform();
+		action.click().sendKeys(current_address, "2105 sunnyview Oval , Edison,NJ,10001").perform();
+
+		action.keyDown(current_address, Keys.CONTROL).sendKeys("a").keyUp(Keys.CONTROL).perform();
+		action.keyDown(Keys.CONTROL).sendKeys("c").keyUp(permanentAddress, Keys.CONTROL).perform();
+		action.keyDown(Keys.CONTROL).sendKeys("v").keyUp(Keys.CONTROL).perform();
+		//
+		submitButton.submit();
+		// driver.switchTo().alert().accept();
+		System.out.println("Submit Alert Accepted");
+
+		/*
+		 * WebDriver driver = new ChromeDriver(); Action action = new Action (driver);
+		 * 
+		 * action.click().sendkey(address1 , "1234 park st , NY , 10001").perform();
+		 * 
+		 * action.keyDown(address1 ,
+		 * Keys.CONTROL).sendkeys("a").KeyUp(Keys.CONTROL).perform();
+		 * action.keyDown(keys.CONTROL).sendkeys("c").KeyUp(address2,
+		 * Keys.CONTROL).perform();
+		 * action.keyDown(keys.CONTROL).sendkeys("a").KeyUp(Keys.CONTROL).perform();
+		 * 
+		 */
+
+	}
+
+}
