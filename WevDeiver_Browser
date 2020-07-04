@@ -1,0 +1,45 @@
+package com.ValidateLogin;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.devtools.page.Page;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+
+import com.MyPageHome.BasePage;
+import com.beust.jcommander.Parameter;
+
+public class BaseTest {
+
+	WebDriver driver;
+	public Page page;
+	
+
+	@BeforeMethod
+	@Parameter("browser")
+	public void setUpTest(String browser) {
+
+		if (browser.equals("Chrome")) {
+			WebDriveManager.chromedriver().setup();
+			driver = new ChromeDriver();
+
+		}else if(browser.equals("FireFox")){
+				WebDriverManager.firefoxdriver.setup();
+				driver = new FirefoxDriver();
+				
+	}else {
+		System.out.println("No browser is define - ");
+	}
+		
+		driver.get("https://app.hubspot.com/login");
+		page = new BasePage(driver);
+		
+		
+		@AfterMethod
+		public void tearDown() {
+			driver.quit();
+		}
+		
+
+}
