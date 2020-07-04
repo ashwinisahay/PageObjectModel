@@ -1,0 +1,80 @@
+package add_1;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
+
+public class SelectBox {
+
+	public static void main(String[] args) {
+		System.setProperty("webdriver.chrome.driver", "C:\\Study\\chromedriver_win32\\chromedriver.exe");
+		WebDriver driver = new ChromeDriver();
+		driver.get("https://www.seleniumeasy.com/test/basic-select-dropdown-demo.html");
+
+		// get Title
+		String str = driver.getTitle();
+		System.out.println(str);// Selenium Easy Demo - Automate All Scenarios
+
+		driver.manage().window().maximize();
+
+		WebElement Headertext = driver.findElement(By.xpath("//*[@id=\"easycont\"]/div/div[2]/div[1]/div[1]"));
+		String HeaderOne = Headertext.getText();
+		System.out.println(HeaderOne);
+
+		WebElement dropdown = driver.findElement(By.id("select-demo"));
+
+		Select dropdown_select = new Select(dropdown);
+
+		dropdown_select.selectByVisibleText("Wednesday");
+
+		// dropdown_select.deselectAll();
+		List<WebElement> NJ = dropdown_select.getOptions();
+
+		System.out.println(NJ.size());
+
+		dropdown_select.selectByValue("Sunday");
+		dropdown_select.selectByIndex(3);
+		dropdown_select.selectByValue("Saturday");
+		dropdown_select.selectByValue("Sunday");
+
+		int isize = NJ.size();
+		for (int i = 0; i < isize; i++) {
+			String svalue = NJ.get(i).getText();
+			System.out.println(svalue);
+		}
+		dropdown_select.selectByValue("Sunday");
+		dropdown_select.selectByIndex(3);
+		// dropdown_select.deselectAll();
+
+		System.out.println("**********Multiple Selection************************");
+
+		WebElement Mdropdown = driver.findElement(By.id("multi-select"));
+
+		Select Multi_select = new Select(Mdropdown);
+
+		Multi_select.selectByIndex(1);
+		Multi_select.selectByIndex(2);
+		Multi_select.selectByIndex(3);
+		Multi_select.selectByIndex(5);
+		Multi_select.selectByIndex(6);
+
+		List<WebElement> Msize = Multi_select.getOptions();
+		int x = Msize.size();
+
+		for (int i = 0; i < x; i++) {
+
+			String Y = Msize.get(i).getText();
+
+			System.out.println(Y);
+
+		}
+
+		// driver.close();
+
+	}
+
+}
