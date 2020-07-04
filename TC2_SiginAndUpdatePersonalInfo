@@ -1,0 +1,107 @@
+package com.CRM.qa.TestCases;
+
+import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
+import com.CRM.qa.BASEFILE.BaseClass;
+import com.CRM.qa.ApplictionPage.*;
+//import com.CRM.qa.TestData.*;
+
+public class SiginAndUpdatePersonalInfo extends BaseClass {
+
+	SiginAndUpdatePersonalInfo SiginAndUpdatePersonalInfo;
+	LoginInPage LoginInPage;
+	SignInPage SignInPage;
+	PersonalInfoPage PersonalInfoPage;
+	// TestDataprovider TestDataprovider;
+
+	public SiginAndUpdatePersonalInfo() {
+		//super();
+		super();
+	}
+
+	@BeforeMethod
+	public void setup() {
+		initialzation();
+		SiginAndUpdatePersonalInfo = new SiginAndUpdatePersonalInfo();
+
+	}
+
+	@Test
+	public void Gettitle() {
+		String title = LoginInPage.pageTitle();
+		Assert.assertEquals(title, "My Store");
+
+	}
+
+	@Test
+	public void Gettextpersonal() {
+		LoginInPage.Already_registered();
+	}
+
+	@Test
+	public void enteremailandpwd() {
+		//String FF = TestDataprovider.FN;
+
+		LoginInPage.login(prop.getProperty("mail"), prop.getProperty("pass"));
+	}
+	@Test
+	public void My_personal_inf_Titel() {
+		String title = SignInPage.pageTitle();
+		Assert.assertEquals(title, "My account - My Store");
+
+	}
+	@Test
+	public void My_personal_information() {
+
+		SignInPage.MyPersonalinfo();
+	}
+	@Test
+	public void radiocheckright() {
+
+		PersonalInfoPage.radiocheck();
+	}
+	@Test
+	public void First_NAme_Update() {
+
+		PersonalInfoPage.First_Name("FN");
+	}
+	@Test
+	public void Last_NAme_Update() {
+
+		PersonalInfoPage.Last_Name("LN");
+	}
+	@Test
+	public void email_Update() {
+
+		PersonalInfoPage.Email_Name("Email");
+	}
+	@Test
+	public void PWD_Update() {
+
+		PersonalInfoPage.Current_Password("Password");
+	}
+	@Test
+	public void New_Password() {
+
+		PersonalInfoPage.Current_Password("New_Password");
+	}
+	@Test
+	public void Confirm_Password() {
+
+		PersonalInfoPage.Current_Password("Confirm_Password");
+	}
+	@Test
+	public void Submit_personal() {
+		PersonalInfoPage.SAVE();
+
+	}
+
+	@AfterMethod
+	public void tearDown() {
+		driver.quit();
+	}
+
+}
