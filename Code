@@ -1,0 +1,54 @@
+// Super Base Class to define all abstract class need for automate website.
+
+//src/main/java
+//com.MyPageHome (Package)
+package com.MyPageHome;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+// Super Base class to declare all the abstract class needed in implement in base class.
+
+public abstract class Page_Home {
+
+	WebDriver driver;
+	WebDriverWait wait;
+ 
+	public Page_Home(WebDriver driver) {
+
+		this.driver = driver;
+		this.wait = new WebDriverWait(this.driver, 15);
+	}
+
+//abstract Method ;
+
+	public abstract String getpageTitel();
+
+	public abstract String getpageHeader(By locator);
+
+	public abstract WebElement getElement(By locator);
+
+	public abstract void waitforElementPresent(By locator);
+
+	public abstract void waitforpageTitle(String title);
+
+	// Wrapper Class
+
+	public <TPage extends BasePage> TPage getInstance(Class<TPage> pageClass) {
+
+		try {
+
+			return pageClass.getDeclaredConstructor(WebElement.class).newInstance(this.driver);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+		
+
+	}
+
+}
