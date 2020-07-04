@@ -1,0 +1,62 @@
+package com.MyPageHome;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+
+public class BasePage extends Page_Home {
+
+	public BasePage(WebDriver driver) {
+		super(driver);
+	}
+
+	@Override
+	public String getpageTitel() {
+
+		return driver.getTitle();
+	}
+
+	@Override
+	public String getpageHeader(By locator) {
+
+		return getElement(locator).getText();
+	}
+
+	@Override
+	public WebElement getElement(By locator) {
+		WebElement element = null;
+
+		try {
+
+			element.findElement(locator);
+			return element;
+		} catch (Exception e) {
+			System.out.println("Error Log" + locator.toString());
+			e.printStackTrace();
+		}
+
+		return element;
+
+	}
+
+	@Override
+	public void waitforElementPresent(By locator) {
+
+		try {
+			wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		}
+
+	}
+
+	@Override
+	public void waitforpageTitle(String title) {
+
+		wait.until(ExpectedConditions.titleContains(title));
+
+	}
+
+}
